@@ -28,6 +28,7 @@
 							<th class="w140">日付</th>
 							<th class="w300">コース内容</th>
 							<th class="w70">出勤</th>
+							<!-- 里行哉 - Task26 -->
 							<th class="w10"></th>
 							<th class="w70"></th>
 							<th class="w70">退勤</th>
@@ -51,6 +52,7 @@
 								</th:block>
 								<td class="w140">[[${dailyAttendanceForm.dispTrainingDate}]]</td>
 								<td class="w300">[[${dailyAttendanceForm.sectionName}]]</td>
+								<!-- 里行哉 - Task26 -->
 								<td class="w70">
 									<select th:name="|attendanceList[${stat.index}].startHour|" class="form-control">
 										<option th:each="startHour : ${attendanceForm.trainingStartHours}" th:value="${startHour.key}" th:inlne="text" class="form-control" 
