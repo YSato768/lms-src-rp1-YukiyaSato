@@ -147,4 +147,54 @@ public class AttendanceUtil {
 		return false;
 	}
 
+	/**
+	 * 出勤、退勤時刻から時（hour）を抽出
+	 * @author 里行哉 -Task26
+	 * @param trainingTime
+	 * @return
+	 */
+	public String calcTrainingTimeHour(String trainingTime) {
+		String hour = trainingTime.substring(0, 2);
+		return hour;
+	}
+	
+	/**
+	 * 出勤、退勤時刻から分（minutes）を抽出
+	 * @author 里行哉 -Task26
+	 * @param trainingTime
+	 * @return
+	 */
+	public String calcTrainingTimeMinutes(String trainingTime) {
+		String minutes = trainingTime.substring(3, 5);
+		return minutes;
+	}
+	
+	/**
+	 * 時（hour）選択用プルダウンの作成
+	 * @author 里行哉 -task26
+	 * @return プルダウン用ハッシュマップ
+	 */
+	public LinkedHashMap<Integer, String> createMapHour(){
+		LinkedHashMap<Integer, String> timeMapHour = new LinkedHashMap<>();
+		timeMapHour.put(null, "");
+		for (int i = 0; i < 24; i++) {
+			timeMapHour.put(i, String.format("%02d", i));
+		}
+		return timeMapHour;
+	}
+	
+	/**
+	 * 分（minutes）選択用プルダウンの作成
+	 * @author 里行哉 - Task26
+	 * @return プルダウン用ハッシュマップ
+	 */
+	public LinkedHashMap<Integer, String> createMapMinutes(){
+		LinkedHashMap<Integer, String> timeMapMinutes = new LinkedHashMap<>();
+		timeMapMinutes.put(null, "");
+		for (int i = 0; i < 60; i++) {
+			timeMapMinutes.put(i, String.format("%02d", i));
+		}
+		return timeMapMinutes;
+	}
+	
 }
