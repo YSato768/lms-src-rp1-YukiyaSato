@@ -18,6 +18,11 @@
 		</th:block>
 	</th:block>
 
+	<form th:object="${attendanceForm}">
+		<div th:if="${#fields.hasAnyErrors()}">
+			<span th;each="err : ${#fields.errors('*')}" th:text="${err}"></span>
+		</div>
+	</form>
 	<div class="row">
 		<div class="bs-component col-sm-12">
 
@@ -83,7 +88,7 @@
 								</td>
 								<td class="w70">[[${dailyAttendanceForm.statusDispName}]]</td>
 								<td class="w240">
-									<input type="text" th:name="|attendanceList[${stat.index}].note|" th:value="${dailyAttendanceForm.note}" class="form-control"></input>
+									<input type="text" th:name="|attendanceList[${stat.index}].note|" th:value="${dailyAttendanceForm.note}" class="form-control" ></input>
 								</td>
 							</tr>
 						</th:block>
@@ -97,12 +102,21 @@
 					<th:block th:if="${session.loginUserDto.role != '0001'}">
 						<input type="submit" value="戻る" name="indexCompany" class="btn btn-default" />
 					</th:block>
-					<input type="submit" value="更新" name="complete" class="btn btn-info" />
+					<input type="submit" id="complete" value="更新" name="complete" class="btn btn-info" />
 				</div>
 
 			</form>
 		</div>
 	</div>
+	
+	<script type="text/javascript" th:inline="javascript">
+		const submit = document.getElementById('complete');
+      complete.addEventListener('click', function(){
+		  if (!(window.confirm('更新します。よろしいですか？'))){
+			  event.preventDefault();
+		  }
+	  });
+    </script>
 
 </body>
 </html>

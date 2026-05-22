@@ -14,6 +14,7 @@ import jp.co.sss.lms.dto.AttendanceManagementDto;
 import jp.co.sss.lms.dto.LoginUserDto;
 import jp.co.sss.lms.form.AttendanceForm;
 import jp.co.sss.lms.service.StudentAttendanceService;
+import jp.co.sss.lms.util.AttendanceUtil;
 import jp.co.sss.lms.util.Constants;
 
 /**
@@ -29,6 +30,8 @@ public class AttendanceController {
 	private StudentAttendanceService studentAttendanceService;
 	@Autowired
 	private LoginUserDto loginUserDto;
+	@Autowired
+	private AttendanceUtil attendanceUtil;
 
 	/**
 	 * 勤怠管理画面 初期表示
@@ -147,7 +150,24 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
+		// 里行哉 - Task27
+		//入力チェック
+		studentAttendanceService.updateInputCheck(attendanceForm, result);
+		if (result.hasErrors()) {
+			attendanceForm.setTrainingStartHours(attendanceUtil.createMapHour());
+			attendanceForm.setTrainingStartMinutes(attendanceUtil.createMapMinutes());
+			attendanceForm.setTrainingEndHours(attendanceUtil.createMapHour());
+			attendanceForm.setTrainingEndMinutes(attendanceUtil.createMapMinutes());
+			// 勤怠管理リストの取得
+			List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
+					.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
+			attendanceForm = studentAttendanceService
+					.setAttendanceForm(attendanceManagementDtoList);
+			model.addAttribute("attendanceForm", attendanceForm);
+			model.addAttribute("org.springframework.validation.BindingResult.attendanceForm", result);
 
+			return "attendance/update";
+		}
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);

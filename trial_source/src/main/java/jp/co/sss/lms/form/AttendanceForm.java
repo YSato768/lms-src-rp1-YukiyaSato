@@ -3,6 +3,7 @@ package jp.co.sss.lms.form;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import jakarta.validation.Valid;
 import lombok.Data;
 
 /**
@@ -11,6 +12,7 @@ import lombok.Data;
  * @author 東京ITスクール
  */
 @Data
+@Valid
 public class AttendanceForm {
 
 	/** LMSユーザーID */
@@ -30,6 +32,7 @@ public class AttendanceForm {
 	/** 中抜け時間(プルダウン) */
 	private LinkedHashMap<Integer, String> blankTimes;
 	/** 日次の勤怠フォームリスト */
+	@Valid
 	private List<DailyAttendanceForm> attendanceList;
 	
 	/** 里行哉 - Task26 */
