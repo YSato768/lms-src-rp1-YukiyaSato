@@ -53,16 +53,7 @@ public class AttendanceController {
 		//里行哉 - Task25
 		//現在日以前の勤怠未入力有無のチェック
 		//未入力がある場合trueを返す
-		Boolean isNotEnter;
-		if (studentAttendanceService.notEnterCheck()) {
-			
-			isNotEnter = true;
-			
-		} else {
-			
-			isNotEnter = false;
-			
-		}
+		Boolean isNotEnter = studentAttendanceService.notEnterCheck();
 		model.addAttribute("isNotEnter", isNotEnter);
 		
 		return "attendance/detail";

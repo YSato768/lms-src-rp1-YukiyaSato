@@ -375,21 +375,25 @@ public class StudentAttendanceService {
 	 * 今日より前の過去日に、未入力の勤怠があるかどうかを判定する
 	 * 
 	 * @author 里行哉 - Task25
-	 * @return true or false
+	 * @return 勤怠未入力件数が1件でもあった場合trueを返す
+	 * @return 勤怠未入力件数が0件の場合falseを返す
 	 * @throws ParseException
 	 */
 	public boolean notEnterCheck() throws ParseException {
 		//現在の日付を取得
 		Date date = new Date();
+		//yyyy/DD/ddの形式へ変換
+		String stringDate = dateUtil.toString(date);
+		Date formatDate = dateUtil.parse(stringDate);
 		//ログインユーザー情報を取得
 		LoginUserDto loginUserDto = loginUserUtil.getLoginUserDto();
 		if (tStudentAttendanceMapper.notEnterCount(loginUserDto.getLmsUserId(),
-				(short) Constants.DB_FLG_FALSE, date) > 0) {
-
+				(short) Constants.DB_FLG_FALSE, formatDate) > 0) {
+			//勤怠未入力件数が1件でもあった場合trueを返す
 			return true;
 
 		} else {
-
+			//勤怠未入力件数が0件の場合falseを返す
 			return false;
 
 		}

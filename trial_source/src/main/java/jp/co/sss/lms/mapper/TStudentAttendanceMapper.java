@@ -71,8 +71,8 @@ public interface TStudentAttendanceMapper {
 	 * @author 里行哉 - Task25
 	 * @param lmsUserId lmsログインユーザーID
 	 * @param deleteFlg 削除フラグ
-	 * @param trainigdate 現在時刻
-	 * @return 未入力の有無
+	 * @param trainigdate 現在日付
+	 * @return 未入力件数
 	 */
 	Integer notEnterCount(Integer lmsUserId, Short deleteFlg, Date trainingDate);
 
