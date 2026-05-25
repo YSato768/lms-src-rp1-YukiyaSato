@@ -19,9 +19,9 @@
 	</th:block>
 
 	<form th:object="${attendanceForm}">
-		<div th:if="${#fields.hasAnyErrors()}">
-			<span th;each="err : ${#fields.errors('*')}" th:text="${err}"></span>
-		</div>
+		<p th:if="${#fields.hasAnyErrors()}">
+			<div th:each="err : ${#fields.errors()}" th:text="'*' + ${err}" style="color:#c7254e;"></div>
+		</p>
 	</form>
 	<div class="row">
 		<div class="bs-component col-sm-12">
