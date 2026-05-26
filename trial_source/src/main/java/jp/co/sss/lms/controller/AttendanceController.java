@@ -139,16 +139,16 @@ public class AttendanceController {
 	 * @throws ParseException
 	 */
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
-	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
+	public String complete(AttendanceForm attendanceForm, BindingResult result, Model model)
 			throws ParseException {
 		// 里行哉 - Task27
 		//入力チェック
 		studentAttendanceService.updateInputCheck(attendanceForm, result);
 		if (result.hasErrors()) {
-			attendanceForm.setTrainingStartHours(attendanceUtil.createMapHour());
-			attendanceForm.setTrainingStartMinutes(attendanceUtil.createMapMinutes());
-			attendanceForm.setTrainingEndHours(attendanceUtil.createMapHour());
-			attendanceForm.setTrainingEndMinutes(attendanceUtil.createMapMinutes());
+			attendanceForm.setTrainingStartHours(attendanceUtil.getHourMap());
+			attendanceForm.setTrainingStartMinutes(attendanceUtil.getMinuteMap());
+			attendanceForm.setTrainingEndHours(attendanceUtil.getHourMap());
+			attendanceForm.setTrainingEndMinutes(attendanceUtil.getMinuteMap());
 			// 勤怠管理リストの取得
 			List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 					.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());

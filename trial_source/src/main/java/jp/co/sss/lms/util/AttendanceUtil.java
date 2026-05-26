@@ -174,7 +174,7 @@ public class AttendanceUtil {
 	 * @author 里行哉 -task26
 	 * @return プルダウン用ハッシュマップ
 	 */
-	public LinkedHashMap<Integer, String> createMapHour(){
+	public LinkedHashMap<Integer, String> getHourMap(){
 		LinkedHashMap<Integer, String> timeMapHour = new LinkedHashMap<>();
 		timeMapHour.put(null, "");
 		for (int i = 0; i < 24; i++) {
@@ -188,7 +188,7 @@ public class AttendanceUtil {
 	 * @author 里行哉 - Task26
 	 * @return プルダウン用ハッシュマップ
 	 */
-	public LinkedHashMap<Integer, String> createMapMinutes(){
+	public LinkedHashMap<Integer, String> getMinuteMap(){
 		LinkedHashMap<Integer, String> timeMapMinutes = new LinkedHashMap<>();
 		timeMapMinutes.put(null, "");
 		for (int i = 0; i < 60; i++) {
