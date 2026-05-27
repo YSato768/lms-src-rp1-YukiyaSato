@@ -508,6 +508,23 @@ public class StudentAttendanceService {
 			}
 			dailyAttendanceForm.setIndex(String.valueOf(indexNum));
 			indexNum++;
+			//再表示用に出退勤の時、分を0埋めに変換
+			if (!(dailyAttendanceForm.getStartHour().equals(""))) {
+				String timeString = String.format("%02d", Integer.parseInt(dailyAttendanceForm.getStartHour()));
+				dailyAttendanceForm.setStartHour(timeString);
+			}
+			if (!(dailyAttendanceForm.getStartMinutes().equals(""))) {
+				String timeString = String.format("%02d", Integer.parseInt(dailyAttendanceForm.getStartMinutes()));
+				dailyAttendanceForm.setStartMinutes(timeString);
+			}
+			if (!(dailyAttendanceForm.getEndHour().equals(""))) {
+				String timeString = String.format("%02d", Integer.parseInt(dailyAttendanceForm.getEndHour()));
+				dailyAttendanceForm.setEndHour(timeString);
+			}
+			if (!(dailyAttendanceForm.getEndMinutes().equals(""))) {
+				String timeString = String.format("%02d", Integer.parseInt(dailyAttendanceForm.getEndMinutes()));
+				dailyAttendanceForm.setEndMinutes(timeString);
+			}
 			
 		}
 	}

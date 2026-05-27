@@ -149,13 +149,8 @@ public class AttendanceController {
 			attendanceForm.setTrainingStartMinutes(attendanceUtil.getMinuteMap());
 			attendanceForm.setTrainingEndHours(attendanceUtil.getHourMap());
 			attendanceForm.setTrainingEndMinutes(attendanceUtil.getMinuteMap());
-			// 勤怠管理リストの取得
-			List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
-					.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
-			attendanceForm = studentAttendanceService
-					.setAttendanceForm(attendanceManagementDtoList);
+			attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
 			model.addAttribute("attendanceForm", attendanceForm);
-			model.addAttribute("org.springframework.validation.BindingResult.attendanceForm", result);
 
 			return "attendance/update";
 		}
