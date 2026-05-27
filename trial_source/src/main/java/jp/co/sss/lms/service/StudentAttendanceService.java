@@ -443,7 +443,7 @@ public class StudentAttendanceService {
 				String note = messageUtil.getMessage("note");
 				String max = "100";
 				result.addError(new FieldError(result.getObjectName(), "attendanceList[" + indexNum + "].note",
-						messageUtil.getMessage("maxlength", new String[] { note, max })));
+						messageUtil.getMessage(Constants.VALID_KEY_MAXLENGTH, new String[] { note, max })));
 			}
 			//出勤時間の時、分いずれかが未入力の場合エラー情報を追加
 			if (!(dailyAttendanceForm.getStartHour() == "" && dailyAttendanceForm.getStartMinutes() == "")) {
@@ -473,9 +473,9 @@ public class StudentAttendanceService {
 			if (dailyAttendanceForm.getStartHour() == "" || dailyAttendanceForm.getStartMinutes() == "") {
 				if (dailyAttendanceForm.getEndHour() != "" && dailyAttendanceForm.getEndMinutes() != "") {
 					result.addError(new FieldError(result.getObjectName(), "attendanceList[" + indexNum + "].startHour",
-							messageUtil.getMessage("attendance.punchInEmpty")));
+							messageUtil.getMessage(Constants.VALID_KEY_ATTENDANCE_PUNCHINEMPTY)));
 					result.addError(new FieldError(result.getObjectName(), "attendanceList[" + indexNum + "].startMinutes",
-							messageUtil.getMessage("attendance.punchInEmpty")));
+							messageUtil.getMessage(Constants.VALID_KEY_ATTENDANCE_PUNCHINEMPTY)));
 				}
 			}
 			//退勤時間が出勤時間よりも前の場合エラー情報を追加
@@ -487,7 +487,7 @@ public class StudentAttendanceService {
 				LocalTime endTime = LocalTime.of(Integer.parseInt(dailyAttendanceForm.getEndHour()), Integer.parseInt(dailyAttendanceForm.getEndMinutes()));
 				if (!startTime.isBefore(endTime)){
 					result.addError(new FieldError(result.getObjectName(), "attendanceList[" + indexNum + "].trainingStartTime",
-							messageUtil.getMessage("attendance.trainingTimeRange",
+							messageUtil.getMessage(Constants.VALID_KEY_ATTENDANCE_TRAININGTIMERANGE,
 									new String[] { String.valueOf(indexNum) })));
 				}
 			}
@@ -502,7 +502,7 @@ public class StudentAttendanceService {
 				if (dailyAttendanceForm.getBlankTime() != null) {
 					if (dailyAttendanceForm.getBlankTime() > totalMinutes) {
 						result.addError(new FieldError(result.getObjectName(), "attendanceList[" + indexNum + "].blankTime",
-								messageUtil.getMessage("attendance.blankTimeError")));
+								messageUtil.getMessage(Constants.VALID_KEY_ATTENDANCE_BLANKTIMEERROR)));
 					}
 				}
 			}
